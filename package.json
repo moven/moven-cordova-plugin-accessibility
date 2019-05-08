@@ -1,17 +1,17 @@
 {
-  "name": "phonegap-plugin-mobile-accessibility",
+  "name": "moven-cordova-plugin-accessibility",
   "description": "PhoneGap Mobile Accessibility Plugin",
   "version": "1.0.5",
-  "homepage": "http://github.com/phonegap/phonegap-mobile-accessibility#readme",
+  "homepage": "http://github.com/moven/moven-cordova-plugin-accessibility#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phonegap/phonegap-mobile-accessibility.git"
+    "url": "git+https://github.com/moven/moven-cordova-plugin-accessibility.git"
   },
   "bugs": {
-    "url": "https://github.com/phonegap/phonegap-mobile-accessibility/issues"
+    "url": "https://github.com/moven/moven-cordova-plugin-accessibility/issues"
   },
   "cordova": {
-    "id": "phonegap-plugin-mobile-accessibility",
+    "id": "moven-cordova-plugin-accessibility",
     "platforms": [
       "ios",
       "android",
