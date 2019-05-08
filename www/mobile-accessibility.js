@@ -140,9 +140,6 @@ MobileAccessibility.prototype.activateOrDeactivateChromeVox = function(bool) {
     if (typeof cvox === "undefined") {
         if (bool) {
             console.warn('A screen reader is running but ChromeVox has failed to initialize.');
-            if (navigator.connection.type === Connection.UNKNOWN || navigator.connection.type === Connection.NONE) {
-                mobileAccessibility.injectLocalAndroidVoxScript();
-            }
         }
     } else {
         // activate or deactivate ChromeVox based on whether or not or not the screen reader is running.
@@ -168,31 +165,6 @@ MobileAccessibility.prototype.hasOrientationChangeListener = false;
 MobileAccessibility.prototype.onOrientationChange = function(event) {
     if (!mobileAccessibility.isChromeVoxActive()) return;
     cvox.ChromeVox.navigationManager.updateIndicator();
-};
-
-MobileAccessibility.prototype.scriptInjected = false;
-MobileAccessibility.prototype.injectLocalAndroidVoxScript = function() {
-    var versionsplit = device.version.split('.');
-    if (device.platform !== "Android" ||
-        !(versionsplit[0] > 4 || (versionsplit[0] == 4 && versionsplit[1] >= 1))  ||
-        typeof cvox !== "undefined" || mobileAccessibility.scriptInjected) return;
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.onload = function(){
-        // console.log(this.src + ' has loaded');
-        if (mobileAccessibility.isChromeVoxActive()) {
-            cordova.fireWindowEvent("screenreaderstatuschanged", {
-                isScreenReaderRunning: true
-            });
-        }
-    };
-
-    script.src = (versionsplit[0] > 4 || versionsplit[1] > 3)
-        ? "plugins/com.phonegap.plugin.mobile-accessibility/android/chromeandroidvox.js"
-        : "plugins/com.phonegap.plugin.mobile-accessibility/android/AndroidVox_v1.js";
-    document.getElementsByTagName('head')[0].appendChild(script);
-    mobileAccessibility.scriptInjected = true;
 };
 
 /**
